@@ -1,0 +1,84 @@
+@use "../../assets//css/responsive.scss";
+.logo {
+  width: 30px;
+  height: 30px;
+  display: block;
+  border-radius: 50%;
+}
+.dropdown-list {
+  width: 100%;
+  min-width: 50vw;
+  max-width: 80vw;
+  display: grid;
+  line-height: 2.5;
+  &__logo-name {
+    display: flex;
+    text-align: center;
+    font-size: medium;
+    align-items: center;
+    font-weight: 600;
+    .name {
+      margin-left: 5px;
+    }
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    svg {
+      color: var(--primary);
+      &:hover {
+        color: var(--primary-hover);
+      }
+    }
+    &:hover {
+      background-color: #f0f0f08b;
+      span {
+        color: var(--primary);
+      }
+    }
+  }
+}
+.header-default {
+  background-color: #fff;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  height: 40px;
+  align-items: center;
+
+  @include responsive.desktop {
+    width: 1000px;
+  }
+  @include responsive.laptop {
+    width: 1000px;
+  }
+  @include responsive.tablet {
+    width: 1000px;
+  }
+  @mixin responsive-styles {
+    width: 100%;
+    .slide-menu {
+      &__right {
+        display: none;
+      }
+      &__drawer {
+        display: block;
+      }
+    }
+  }
+
+  @include responsive.mobile-small {
+    @include responsive-styles;
+  }
+
+  @include responsive.mobile-medium {
+    @include responsive-styles;
+  }
+
+  @include responsive.mobile-large {
+    @include responsive-styles;
+  }
+}

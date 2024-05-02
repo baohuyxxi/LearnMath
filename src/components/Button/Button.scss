@@ -1,0 +1,72 @@
+// Button.scss
+
+.button {
+  // Style mặc định cho button
+  padding: 8px 16px;
+  font-size: 16px;
+  border: none;
+  clip-path: polygon(
+    5% 0%,
+    95% 0%,
+    100% 10%,
+    100% 90%,
+    100% 90%,
+    95% 100%,
+    5% 100%,
+    0% 90%,
+    0% 10%
+  );
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.primary {
+  // Style cho button loại primary
+  background-color: var(--primary);
+  color: #fff;
+
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+}
+
+.secondary {
+  // Style cho button loại secondary
+  background-color: #6c757d;
+  color: #fff;
+
+  &:hover {
+    background-color: #5a6268;
+  }
+}
+
+.danger {
+  // Style cho button loại danger
+  background-color: #dc3545;
+  color: #fff;
+
+  &:hover {
+    background-color: #bd2130;
+  }
+}
+.medium {
+  font-size: 14px;
+  height: 35px;
+}
+.large {
+  font-size: 18px;
+  height: 45px;
+}
+.xlarge {
+  font-size: 20px;
+  height: 50px;
+}

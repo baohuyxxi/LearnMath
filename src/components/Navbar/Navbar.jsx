@@ -1,0 +1,53 @@
+import "./Navbar.scss";
+import React, { useState } from "react";
+import logo from "~/assets/images/logo.jpg";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
+import { Link } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Drawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+
+export default function Navbar() {
+  return (
+    <header className="navbar-default">
+      <div className="slide-menu">
+        <Link to="/" className="slide-menu__item">
+          <HomeOutlinedIcon />
+          <span>Trang chủ</span>
+        </Link>
+        <Link to="#z" className="slide-menu__item">
+          <span>Giới thiệu</span>
+        </Link>
+        <Link to="#z" className="slide-menu__item">
+          <span>Đội ngũ giáo viên</span>
+        </Link>
+        <Link to="#z" className="slide-menu__item">
+          <span>Khóa học</span>
+        </Link>
+        <Link to="#z" className="slide-menu__item">
+          <span>Bài tập về nhà</span>
+        </Link>
+        <Link to="#z" className="slide-menu__item">
+          <span>Toán vui</span>
+        </Link>
+        <Link to="#z" className="slide-menu__item">
+          <span>Thi thử</span>
+        </Link>
+        <Link to="#z" className="slide-menu__item">
+          <span>Đề thi </span>
+        </Link>
+        <Link to="#z" className="slide-menu__item">
+          <span>Tài liệu</span>
+        </Link>
+      </div>
+     
+    </header>
+  );
+}
