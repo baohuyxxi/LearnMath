@@ -1,0 +1,35 @@
+.profile-teacher {
+    margin-top: -100px;
+    .profile-teacher__info {
+      display: flex;
+      align-items: center;
+    }
+  
+    .profile-teacher__avatar {
+      width: 300px;
+      height: 300px;
+      margin-right: 20px;
+    }
+  
+    .profile-teacher__details {
+      flex: 1;
+    }
+  
+    .profile-teacher__name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  
+    .profile-teacher__position,
+    .profile-teacher__sex {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  
+    .profile-teacher__introduction {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+  

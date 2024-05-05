@@ -20,6 +20,9 @@ const Exams = lazy(() => import("../pages/Exams/Exams"));
 const Courses = lazy(() => import("../pages/Courses/Courses"));
 const Login = lazy(() => import("../pages/Login/Login"));
 const Tutorials = lazy(() => import("../pages/Tutorials/Tutorials"));
+const ProfileTeacher = lazy(() =>
+  import("../pages/ProfileTeacher/ProfileTeacher")
+);
 
 const Auth = () => {
   return (
@@ -77,6 +80,14 @@ const Auth = () => {
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <Tutorials />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/teaching-staff/:id"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProfileTeacher />
           </Suspense>
         }
       />
