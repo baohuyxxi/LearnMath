@@ -1,14 +1,31 @@
-.frame-page{
-    max-width: 1488px;
-    height: max-content;
+@use "../../assets//css/responsive.scss";
+.frame-page {
+  max-width: 1488px;
+  height: max-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .frame-page__main {
+    min-height: 1000px;
+    max-height: max-content;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    .frame-page__main{
-        margin: 100px 100px 50px 100px;
-        min-height: 1000px;
-        max-height: max-content;
-        position: relative;
-        display: flex;
+    display: grid;
+    margin: 100px 200px 50px 200px;
+    @include responsive.laptop {
+      margin: 100px 200px 50px 200px;
     }
+    @include responsive.tablet {
+      margin: 100px 100px 50px 100px;
+    }
+    @include responsive.mobile-large {
+      margin: 100px 50px 50px 50px;
+    }
+    @include responsive.mobile-medium {
+      margin: 100px 20px 50px 20px;
+    }
+    @include responsive.mobile-small {
+      margin: 100px 10px 50px 10px;
+    }
+
+  }
 }

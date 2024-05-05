@@ -1,0 +1,18 @@
+.banner{
+    top: 80px;
+    position: relative;
+    display: flex;
+    height: 150px;
+    width: 100%;
+    background-color: var(--primary);
+
+    &__breadcrumbs{
+        display: flex;
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        .MuiBreadcrumbs-ol {
+            color: #fff;
+        }
+    }
+}

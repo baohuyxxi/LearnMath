@@ -52,7 +52,7 @@ export default function Footer() {
               Facebook: fb.co/mai.huy.7622
             </Link>
             <Link to="/#contact" className="footer-about__item__content">
-              Youtube: MathX Channel
+              Youtube: Bảo Huy XXI
             </Link>
             </div>
         </div>

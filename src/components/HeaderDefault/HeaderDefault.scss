@@ -47,38 +47,43 @@
   position: fixed;
   top: 0;
   height: 40px;
-  align-items: center;
+  width: 100%;
+  display: flex;
+  place-content: center;
+  &__container {
+    @include responsive.desktop {
+      width: 1000px;
+    }
+    @include responsive.laptop {
+      width: 1000px;
+    }
+    @include responsive.tablet {
+      width: 90%;
+    }
+    @mixin responsive-styles {
+      width: 100%;
+      padding: 0 5%;
 
-  @include responsive.desktop {
-    width: 1000px;
-  }
-  @include responsive.laptop {
-    width: 1000px;
-  }
-  @include responsive.tablet {
-    width: 1000px;
-  }
-  @mixin responsive-styles {
-    width: 100%;
-    .slide-menu {
-      &__right {
-        display: none;
-      }
-      &__drawer {
-        display: block;
+      .slide-menu {
+        &__right {
+          display: none;
+        }
+        &__drawer {
+          display: block;
+        }
       }
     }
-  }
 
-  @include responsive.mobile-small {
-    @include responsive-styles;
-  }
+    @include responsive.mobile-small {
+      @include responsive-styles;
+    }
 
-  @include responsive.mobile-medium {
-    @include responsive-styles;
-  }
+    @include responsive.mobile-medium {
+      @include responsive-styles;
+    }
 
-  @include responsive.mobile-large {
-    @include responsive-styles;
+    @include responsive.mobile-large {
+      @include responsive-styles;
+    }
   }
 }

@@ -1,0 +1,29 @@
+// Introduce.scss
+
+.introduce {
+    
+    &__title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align-last: center;
+    }
+  
+    &__content {
+      p {
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+  
+      // Thêm đoạn mã CSS để tạo hiệu ứng cho nội dung giới thiệu
+      // Ví dụ:
+      // max-height: 300px;
+      // overflow: hidden;
+      // transition: max-height 0.3s ease;
+  
+      // &.expanded {
+      //   max-height: none;
+      // }
+    }
+  }
+  
