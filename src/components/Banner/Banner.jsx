@@ -23,7 +23,7 @@ export default function Banner() {
           {pathnames.map((name, index) => {
             const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
             const isLast = index === pathnames.length - 1;
-            const label = pathLabels[routeTo] || name; // Lấy nhãn từ model dữ liệu
+            const label = pathLabels[routeTo] || name; 
             return isLast ? (
               <span key={name}>{label}</span>
             ) : (
