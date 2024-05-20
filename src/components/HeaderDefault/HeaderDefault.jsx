@@ -1,6 +1,6 @@
 import "./HeaderDefault.scss";
 import React, { useState } from "react";
-import logo from "~/assets/images/logo.jpg";
+import logo from "~/assets/images/logoMain.jpg";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
@@ -33,7 +33,7 @@ export default function HeaderDefault() {
           <div className="slide-menu__left__item">
             <img src={logo} alt="logo" className="logo" />
           </div>
-          <div className="slide-menu__left__item">Học toán Online</div>
+          <div className="slide-menu__left__item">Bi Steam</div>
         </div>
         <div className="slide-menu__right col">
           <Link to="/#phone" className="slide-menu__right__item">
@@ -72,7 +72,7 @@ export default function HeaderDefault() {
             <div className="dropdown-list">
               <div className="dropdown-list__logo-name">
                 <img src={logo} alt="logo" className="logo" />
-                <span className="name">Học toán Online</span>
+                <span className="name">Bi Steam</span>
               </div>
               <Link to="/introduce" className="dropdown-list__item">
                 <span>Giới thiệu</span>

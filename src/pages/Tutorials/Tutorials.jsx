@@ -7,23 +7,23 @@ export default function Tutorials() {
     <FramePage>
       <div className="tutorials">
         <h1 className="tutorials__title">
-          Hướng dẫn học trên website Học toán online
+          Hướng dẫn học trên website Bi Steam
         </h1>
         <div className="tutorials__content">
-          <p>Chào mừng bạn đến với website học toán online Học toán online!</p>
+          <p>Chào mừng bạn đến với website Bi Steam Bi Steam!</p>
           <p>
-            Học toán online là chương trình học toán online dành cho học sinh tiểu học
+            Bi Steam là chương trình Bi Steam dành cho học sinh tiểu học
             và trung học cơ sở. Chúng tôi cung cấp nội dung phong phú, đa dạng,
             dễ hiểu và hấp dẫn để kích thích sự say mê và sáng tạo trong việc
             học toán của học sinh.
           </p>
           <p>
-            Học toán online được thành lập bởi thầy giáo Trần Hữu Hiếu và đội ngũ giáo
+            Bi Steam được thành lập bởi thầy giáo Trần Hữu Hiếu và đội ngũ giáo
             viên tâm huyết, giàu kinh nghiệm. Chúng tôi cam kết mang đến cho học
             sinh một môi trường học tập chất lượng và hiệu quả.
           </p>
           <p>
-            Khi tham gia học online trên Học toán online, học sinh sẽ được tiếp cận với
+            Khi tham gia học online trên Bi Steam, học sinh sẽ được tiếp cận với
             nhiều tính năng học toán hữu ích như:
           </p>
           <ul>
@@ -35,7 +35,7 @@ export default function Tutorials() {
             <li>Luyện tập tổng hợp theo kỹ năng hoặc theo chuyên đề</li>
           </ul>
           <p>
-            Và còn nhiều tính năng khác đang chờ đợi bạn khám phá trên Học toán online!
+            Và còn nhiều tính năng khác đang chờ đợi bạn khám phá trên Bi Steam!
           </p>
           {/* Thêm nội dung hướng dẫn tiếp theo */}
         </div>

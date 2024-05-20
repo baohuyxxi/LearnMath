@@ -1,6 +1,6 @@
 import "./Navbar.scss";
 import React, { useState } from "react";
-import logo from "~/assets/images/logo.jpg";
+import logo from "~/assets/images/logoMain.jpg";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";

@@ -1,9 +1,9 @@
 @use "../../assets//css/responsive.scss";
 .logo {
-  width: 30px;
-  height: 30px;
+  width: 100px;
+  height: 40px;
+  object-fit: cover;
   display: block;
-  border-radius: 50%;
 }
 .dropdown-list {
   width: 100%;

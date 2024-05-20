@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import logo from "~/assets/images/logo.jpg";
+import logo from "~/assets/images/logoMain.jpg";
 import { useLocation } from 'react-router-dom';
 import './NotFoundPage.scss'
 export default function Error() {
