@@ -6,15 +6,19 @@ import Button from "~/components/Button/Button";
 import Radio from "~/components/Radio/Radio";
 import { roleLogin } from "~/models/roleLogin";
 import AuthAPI from "~/services/apis/AuthAPI";
-
+import { useDispatch } from "react-redux";
+import accountSlice from "~/redux/accountSlice";
 export default function Login() {
-  const [dataLogin, setDataLogin] = useState({account: '', password: ''})
+  const [dataLogin, setDataLogin] = useState({ account: "", password: "" });
   const [selectRole, setSelectRole] = useState();
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     AuthAPI.login(dataLogin).then((res) => {
       if (res.status === 200) {
-        console.log("Đăng nhập thành công");
+        dispatch(accountSlice.actions.login(res.data));
+        
       } else {
         console.log("Đăng nhập thất bại");
       }
@@ -24,9 +28,9 @@ export default function Login() {
   const handleChange = (e) => {
     setDataLogin({
       ...dataLogin,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <FramePage>
       <div id="login-form">
@@ -35,7 +39,7 @@ export default function Login() {
           {roleLogin.map((role) => (
             <div class="radio">
               <input
-                id= {role.role}
+                id={role.role}
                 className="radio"
                 type="radio"
                 checked={role.role === selectRole}
@@ -52,9 +56,21 @@ export default function Login() {
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="account">Email/Username/SĐT:</label>
-          <input type="text" id="account" name="account" value={dataLogin.account} onChange={e => handleChange(e)}/>
+          <input
+            type="text"
+            id="account"
+            name="account"
+            value={dataLogin.account}
+            onChange={(e) => handleChange(e)}
+          />
           <label htmlFor="password">Mật khẩu :</label>
-          <input type="password" id="password" name="password"  value={dataLogin.password} onChange={e => handleChange(e)}/>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={dataLogin.password}
+            onChange={(e) => handleChange(e)}
+          />
           <input type="submit" value="Đăng nhập" />
         </form>
       </div>

@@ -30,7 +30,7 @@ const Auth = () => {
       <Route
         path="/"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <HomePage />
           </Suspense>
         }
@@ -38,7 +38,7 @@ const Auth = () => {
       <Route
         path="/introduce"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Introduce />
           </Suspense>
         }
@@ -46,7 +46,7 @@ const Auth = () => {
       <Route
         path="/teaching-staff"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <TeachingStaff />
           </Suspense>
         }
@@ -54,7 +54,7 @@ const Auth = () => {
       <Route
         path="/exams"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Exams />
           </Suspense>
         }
@@ -62,7 +62,7 @@ const Auth = () => {
       <Route
         path="/courses"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Courses />
           </Suspense>
         }
@@ -70,7 +70,7 @@ const Auth = () => {
       <Route
         path="/login"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Login />
           </Suspense>
         }
@@ -78,7 +78,7 @@ const Auth = () => {
       <Route
         path="/tutorials"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Tutorials />
           </Suspense>
         }
@@ -86,7 +86,7 @@ const Auth = () => {
       <Route
         path="/teaching-staff/:id"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <ProfileTeacher />
           </Suspense>
         }

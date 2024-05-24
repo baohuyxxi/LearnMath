@@ -1,36 +1,21 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import accountSlice from "./accountSlice";
+// Import các slices reducer của bạn ở đây
+// import userSlice from './userSlice';
 
-const persistConfig = {
-    key: 'root',
-    whiteList: [''],
-    blacklist: [''],
-    storage
-};
+
 const rootReducer = combineReducers({
-    // user: userSlice.reducer,
-    // booking: bookingSlice.reducer,
-    // settingowner: setupOwnerSlice.reducer,
-    // notification: notificationSlice.reducer,
-    // global: globalSlice.reducer,
-    // settingaccom: settingAccomSlice.reducer,
-    // filterAccom: filterAcomSlice.reducer,
-    // createAccom: createAccomSlice.reducer
+  // Định nghĩa các reducers của bạn ở đây
+  // user: userSlice.reducer,
+  account: accountSlice.reducer,
 });
-
-
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-            }
-        })
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-export let persistor = persistStore(store);
+export default store;

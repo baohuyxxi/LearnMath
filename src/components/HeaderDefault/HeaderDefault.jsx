@@ -11,11 +11,14 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import List from "@mui/material/List";
+import { useSelector, useDispatch } from "react-redux";
+import accountSlice from "~/redux/accountSlice";
 
 export default function HeaderDefault() {
+  const dispatch = useDispatch();
   const [anchor, setAnchor] = useState("right");
   const [open, setOpen] = useState(false);
+  const account = useSelector((state) => state.account);
   const toggleDrawer = (anchor, open) => (event) => {
     console.log("toggleDrawer");
     if (
@@ -26,6 +29,11 @@ export default function HeaderDefault() {
     }
     setOpen(open);
   };
+
+  const handleLogout = () => {
+    dispatch(accountSlice.actions.logout());
+
+  }
   return (
     <header className="header-default ">
       <div className="header-default__container slide-menu">
@@ -33,7 +41,7 @@ export default function HeaderDefault() {
           <div className="slide-menu__left__item">
             <img src={logo} alt="logo" className="logo" />
           </div>
-          <div className="slide-menu__left__item">Bi Steam</div>
+          <div className="slide-menu__left__item"></div>
         </div>
         <div className="slide-menu__right col">
           <Link to="/#phone" className="slide-menu__right__item">
@@ -44,18 +52,23 @@ export default function HeaderDefault() {
             <IntegrationInstructionsIcon />
             <span>Hướng dẫn học</span>
           </Link>
-          <Link to="#z" className="slide-menu__right__item">
-            <AppRegistrationIcon />
-            <span>Đăng ký</span>
-          </Link>
-          <Link to="/Login" className="slide-menu__right__item">
-            <LoginIcon />
-            <span>Đăng nhập</span>
-          </Link>
-          <Link to="/login" className="slide-menu__right__item">
-            <LogoutIcon />
-            <span>Đăng xuất</span>
-          </Link>
+          {account.info === null ? (
+            <>
+              <Link to="#z" className="slide-menu__right__item">
+                <AppRegistrationIcon />
+                <span>Đăng ký</span>
+              </Link>
+              <Link to="/Login" className="slide-menu__right__item">
+                <LoginIcon />
+                <span>Đăng nhập</span>
+              </Link>
+            </>
+          ) : (
+            <Link  className="slide-menu__right__item" onClick={handleLogout}>
+              <LogoutIcon />
+              <span>Đăng xuất</span>
+            </Link>
+          )}
         </div>
         <div className="slide-menu__drawer">
           <IconButton
@@ -72,7 +85,7 @@ export default function HeaderDefault() {
             <div className="dropdown-list">
               <div className="dropdown-list__logo-name">
                 <img src={logo} alt="logo" className="logo" />
-                <span className="name">Bi Steam</span>
+                <span className="name"></span>
               </div>
               <Link to="/introduce" className="dropdown-list__item">
                 <span>Giới thiệu</span>
@@ -106,18 +119,25 @@ export default function HeaderDefault() {
                 <IntegrationInstructionsIcon />
                 <span>Hướng dẫn học </span>
               </Link>
-              <Link to="#z" className="dropdown-list__item">
-                <AppRegistrationIcon />
-                <span>Đăng ký</span>
-              </Link>
-              <Link to="#login" className="dropdown-list__item">
-                <LoginIcon />
-                <span>Đăng nhập</span>
-              </Link>
-              <Link to="/login" className="dropdown-list__item">
-                <LogoutIcon />
-                <span>Đăng xuất</span>
-              </Link>
+              {account.info === null ? (
+                <>
+                  <Link to="#z" className="dropdown-list__item">
+                    <AppRegistrationIcon />
+                    <span>Đăng ký</span>
+                  </Link>
+                  <Link to="#login" className="dropdown-list__item">
+                    <LoginIcon />
+                    <span>Đăng nhập</span>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link className="dropdown-list__item" onClick={handleLogout}>
+                    <LogoutIcon />
+                    <span>Đăng xuất</span>
+                  </Link>
+                </>
+              )}
             </div>
           </Box>
         </Drawer>
