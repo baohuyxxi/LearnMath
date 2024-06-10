@@ -8,17 +8,18 @@ import { roleLogin } from "~/models/roleLogin";
 import AuthAPI from "~/services/apis/AuthAPI";
 import { useDispatch } from "react-redux";
 import accountSlice from "~/redux/accountSlice";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [dataLogin, setDataLogin] = useState({ account: "", password: "" });
   const [selectRole, setSelectRole] = useState();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     AuthAPI.login(dataLogin).then((res) => {
       if (res.status === 200) {
         dispatch(accountSlice.actions.login(res.data));
-        
+        navigate("/");
       } else {
         console.log("Đăng nhập thất bại");
       }

@@ -13,14 +13,17 @@ import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import accountSlice from "~/redux/accountSlice";
+import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 export default function HeaderDefault() {
   const dispatch = useDispatch();
   const [anchor, setAnchor] = useState("right");
   const [open, setOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false); // State to control ConfirmDialog
   const account = useSelector((state) => state.account);
+
   const toggleDrawer = (anchor, open) => (event) => {
-    console.log("toggleDrawer");
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -32,26 +35,31 @@ export default function HeaderDefault() {
 
   const handleLogout = () => {
     dispatch(accountSlice.actions.logout());
+    setConfirmOpen(false); // Close ConfirmDialog after logout
+  };
 
-  }
   return (
-    <header className="header-default ">
+    <header className="header-default">
       <div className="header-default__container slide-menu">
         <div className="slide-menu__left col">
           <div className="slide-menu__left__item">
             <img src={logo} alt="logo" className="logo" />
           </div>
-          <div className="slide-menu__left__item"></div>
+
+          <Link to="/" className="slide-menu__left__item">
+            <HomeOutlinedIcon />
+            <span>Trang chủ</span>
+          </Link>
+          <Link to="/introduce" className="slide-menu__left__item">
+            <span>Giới thiệu</span>
+          </Link>
         </div>
         <div className="slide-menu__right col">
           <Link to="/#phone" className="slide-menu__right__item">
             <LocalPhoneIcon />
             <span>0123456789</span>
           </Link>
-          <Link to="/tutorials" className="slide-menu__right__item">
-            <IntegrationInstructionsIcon />
-            <span>Hướng dẫn học</span>
-          </Link>
+
           {account.info === null ? (
             <>
               <Link to="#z" className="slide-menu__right__item">
@@ -64,7 +72,10 @@ export default function HeaderDefault() {
               </Link>
             </>
           ) : (
-            <Link  className="slide-menu__right__item" onClick={handleLogout}>
+            <Link
+              className="slide-menu__right__item"
+              onClick={() => setConfirmOpen(true)}
+            >
               <LogoutIcon />
               <span>Đăng xuất</span>
             </Link>
@@ -132,7 +143,10 @@ export default function HeaderDefault() {
                 </>
               ) : (
                 <>
-                  <Link className="dropdown-list__item" onClick={handleLogout}>
+                  <Link
+                    className="dropdown-list__item"
+                    onClick={() => setConfirmOpen(true)}
+                  >
                     <LogoutIcon />
                     <span>Đăng xuất</span>
                   </Link>
@@ -142,6 +156,14 @@ export default function HeaderDefault() {
           </Box>
         </Drawer>
       </div>
+      {confirmOpen && (
+        <ConfirmDialog
+          title="Xác nhận đăng xuất"
+          message="Bạn có chắc chắn muốn đăng xuất?"
+          onConfirm={handleLogout}
+          onCancel={() => setConfirmOpen(false)}
+        />
+      )}
     </header>
   );
 }

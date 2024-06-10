@@ -1,27 +1,19 @@
-import "./Navbar.scss";
+import "./NavbarTeacher.scss";
 import React, { useState } from "react";
-import logo from "~/assets/images/logoMain.jpg";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import LogoutIcon from "@mui/icons-material/Logout";
-import LoginIcon from "@mui/icons-material/Login";
 import { Link } from "react-router-dom";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Drawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
-export default function Navbar() {
+export default function NavbarTeacher() {
   return (
     <header className="navbar-default">
       <div className="navbar-default__container">
         <div className="slide-menu">
-         
-          <Link to="/tutorials" className="slide-menu__item">
-            <span>Hướng dẫn học</span>
+          <Link to="/" className="slide-menu__item">
+            <HomeOutlinedIcon />
+            <span>Trang chủ</span>
+          </Link>
+          <Link to="/introduce" className="slide-menu__item">
+            <span>Giới thiệu</span>
           </Link>
           <Link to="/teaching-staff" className="slide-menu__item">
             <span>Đội ngũ giáo viên</span>

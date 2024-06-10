@@ -24,7 +24,11 @@ const ProfileTeacher = lazy(() =>
   import("../pages/ProfileTeacher/ProfileTeacher")
 );
 
+
+// Admin
+const CreateClass = lazy(() => import("../pages/admin/CreateClass/CreateClass"));
 const Auth = () => {
+  const role =  JSON.parse(localStorage.getItem("account"))?.role;
   return (
     <Routes>
       <Route
@@ -99,6 +103,18 @@ const Auth = () => {
           </Suspense>
         }
       />
+      {
+        role === "ADMIN" && (
+          <Route
+            path="/admin/create-class"
+            element={
+              <Suspense fallback={<div></div>}>
+                <CreateClass />
+              </Suspense>
+            }
+          />
+        )
+      }
     </Routes>
   );
 };

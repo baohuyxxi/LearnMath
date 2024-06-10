@@ -20,18 +20,22 @@ export default function Banner() {
           <Link to="/">
             <HomeIcon />
           </Link>
-          {pathnames.map((name, index) => {
-            const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
-            const isLast = index === pathnames.length - 1;
-            const label = pathLabels[routeTo] || name; 
-            return isLast ? (
-              <span key={name}>{label}</span>
-            ) : (
-              <Link key={name} to={routeTo}>
-                {label}
-              </Link>
-            );
-          })}
+          {pathnames.length === 0 ? (
+            <span>Trang chủ</span>
+          ) : (
+            pathnames.map((name, index) => {
+              const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
+              const isLast = index === pathnames.length - 1;
+              const label = pathLabels[routeTo] || name;
+              return isLast ? (
+                <span key={name}>{label}</span>
+              ) : (
+                <Link key={name} to={routeTo}>
+                  {label}
+                </Link>
+              );
+            })
+          )}
         </Breadcrumbs>
       </div>
     </div>
