@@ -29,9 +29,10 @@ html[mode="dark"] {
     &__left {
       display: flex;
       align-items: center;
-      row-gap: 10px;
+
       &__item {
         display: flex;
+        padding: 0 5px;
         place-content: center;
         border-bottom: 3px solid transparent; // Đặt border ban đầu trong suốt
         &:hover {

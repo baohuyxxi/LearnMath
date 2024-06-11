@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import accountSlice from "~/redux/accountSlice";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 
 export default function HeaderDefault() {
   const dispatch = useDispatch();
@@ -47,7 +48,6 @@ export default function HeaderDefault() {
           </div>
 
           <Link to="/" className="slide-menu__left__item">
-            <HomeOutlinedIcon />
             <span>Trang chủ</span>
           </Link>
           <Link to="/introduce" className="slide-menu__left__item">
@@ -55,6 +55,10 @@ export default function HeaderDefault() {
           </Link>
         </div>
         <div className="slide-menu__right col">
+          <Link to="https://www.facebook.com/BiSteam129" className="slide-menu__right__item">
+            <FacebookOutlinedIcon/>
+            <span>Facebook Bi Steam</span>
+          </Link>
           <Link to="/#phone" className="slide-menu__right__item">
             <LocalPhoneIcon />
             <span>0123456789</span>

@@ -48,8 +48,8 @@ export default function Footer() {
               <span className="footer-about__item__content__email">
                 maihuy7622@gmail.com</span>
             </Link>
-            <Link to="/#contact" className="footer-about__item__content">
-              Facebook: fb.co/mai.huy.7622
+            <Link to="https://www.facebook.com/BiSteam129" className="footer-about__item__content">
+              Facebook: BiSteam129
             </Link>
             <Link to="/#contact" className="footer-about__item__content">
               Youtube: Bảo Huy XXI
