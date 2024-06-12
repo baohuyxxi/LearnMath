@@ -38,7 +38,3 @@ export default function CreateClass() {
   );
 }
 
-// {
-//     "name": "Lớp 1",
-//     "description": "Đây là lớp 1"
-// }

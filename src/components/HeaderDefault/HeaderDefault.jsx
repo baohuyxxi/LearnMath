@@ -1,34 +1,49 @@
 import "./HeaderDefault.scss";
 import React, { useState } from "react";
-import logo from "~/assets/images/logoMain.jpg";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import LogoutIcon from "@mui/icons-material/Logout";
-import LoginIcon from "@mui/icons-material/Login";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import { useSelector, useDispatch } from "react-redux";
-import accountSlice from "~/redux/accountSlice";
-import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
+import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import logo from "~/assets/images/logoMain.jpg";
+import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
+import accountSlice from "~/redux/accountSlice";
+import { getLeftMenuItems, getRightMenuItems, getDropdownMenuItems } from '~/models/functionRole'
 
 export default function HeaderDefault() {
   const dispatch = useDispatch();
   const [anchor, setAnchor] = useState("right");
   const [open, setOpen] = useState(false);
-  const [confirmOpen, setConfirmOpen] = useState(false); // State to control ConfirmDialog
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const account = useSelector((state) => state.account);
+  const role = account.info?.role;
+
+  const leftMenuItems = getLeftMenuItems();
+  const rightMenuItems = getRightMenuItems();
+  const dropdownMenuItems = getDropdownMenuItems(role);
+
+  const getIconComponent = (iconName) => {
+    switch (iconName) {
+      case 'LocalPhoneIcon':
+        return <LocalPhoneIcon />;
+      case 'IntegrationInstructionsIcon':
+        return <IntegrationInstructionsIcon />;
+      case 'FacebookOutlinedIcon':
+        return <FacebookOutlinedIcon />;
+      default:
+        return null;
+    }
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
     }
     setOpen(open);
@@ -36,7 +51,7 @@ export default function HeaderDefault() {
 
   const handleLogout = () => {
     dispatch(accountSlice.actions.logout());
-    setConfirmOpen(false); // Close ConfirmDialog after logout
+    setConfirmOpen(false);
   };
 
   return (
@@ -46,24 +61,19 @@ export default function HeaderDefault() {
           <div className="slide-menu__left__item">
             <img src={logo} alt="logo" className="logo" />
           </div>
-
-          <Link to="/" className="slide-menu__left__item">
-            <span>Trang chủ</span>
-          </Link>
-          <Link to="/introduce" className="slide-menu__left__item">
-            <span>Giới thiệu</span>
-          </Link>
+          {leftMenuItems.map((item, index) => (
+            <Link key={index} to={item.to} className="slide-menu__left__item">
+              <span>{item.text}</span>
+            </Link>
+          ))}
         </div>
         <div className="slide-menu__right col">
-          <Link to="https://www.facebook.com/BiSteam129" className="slide-menu__right__item">
-            <FacebookOutlinedIcon/>
-            <span>Facebook Bi Steam</span>
-          </Link>
-          <Link to="/#phone" className="slide-menu__right__item">
-            <LocalPhoneIcon />
-            <span>0123456789</span>
-          </Link>
-
+          {rightMenuItems.map((item, index) => (
+            <Link key={index} to={item.to} className="slide-menu__right__item">
+              {getIconComponent(item.icon)}
+              <span>{item.text}</span>
+            </Link>
+          ))}
           {account.info === null ? (
             <>
               <Link to="#z" className="slide-menu__right__item">
@@ -76,22 +86,14 @@ export default function HeaderDefault() {
               </Link>
             </>
           ) : (
-            <Link
-              className="slide-menu__right__item"
-              onClick={() => setConfirmOpen(true)}
-            >
+            <Link className="slide-menu__right__item" onClick={() => setConfirmOpen(true)}>
               <LogoutIcon />
               <span>Đăng xuất</span>
             </Link>
           )}
         </div>
         <div className="slide-menu__drawer">
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={(e) => setOpen(true)}
-          >
+          <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={(e) => setOpen(true)}>
             <MenuIcon />
           </IconButton>
         </div>
@@ -102,38 +104,12 @@ export default function HeaderDefault() {
                 <img src={logo} alt="logo" className="logo" />
                 <span className="name"></span>
               </div>
-              <Link to="/introduce" className="dropdown-list__item">
-                <span>Giới thiệu</span>
-              </Link>
-              <Link to="/teaching-staff" className="dropdown-list__item">
-                <span>Đội ngũ giáo viên</span>
-              </Link>
-              <Link to="/courses" className="dropdown-list__item">
-                <span>Khóa học</span>
-              </Link>
-              <Link to="#z" className="dropdown-list__item">
-                <span>Bài tập về nhà</span>
-              </Link>
-              <Link to="#z" className="dropdown-list__item">
-                <span>Toán vui</span>
-              </Link>
-              <Link to="#z" className="dropdown-list__item">
-                <span>Thi thử</span>
-              </Link>
-              <Link to="/exams" className="dropdown-list__item">
-                <span>Đề thi </span>
-              </Link>
-              <Link to="#z" className="dropdown-list__item">
-                <span>Tài liệu</span>
-              </Link>
-              <Link to="/#phone" className="dropdown-list__item">
-                <LocalPhoneIcon />
-                <span>0123456789</span>
-              </Link>
-              <Link to="/tutorials" className="dropdown-list__item">
-                <IntegrationInstructionsIcon />
-                <span>Hướng dẫn học </span>
-              </Link>
+              {dropdownMenuItems.map((item, index) => (
+                <Link key={index} to={item.to} className="dropdown-list__item">
+                  {item.icon && getIconComponent(item.icon)}
+                  <span>{item.text}</span>
+                </Link>
+              ))}
               {account.info === null ? (
                 <>
                   <Link to="#z" className="dropdown-list__item">
@@ -146,15 +122,10 @@ export default function HeaderDefault() {
                   </Link>
                 </>
               ) : (
-                <>
-                  <Link
-                    className="dropdown-list__item"
-                    onClick={() => setConfirmOpen(true)}
-                  >
-                    <LogoutIcon />
-                    <span>Đăng xuất</span>
-                  </Link>
-                </>
+                <Link className="dropdown-list__item" onClick={() => setConfirmOpen(true)}>
+                  <LogoutIcon />
+                  <span>Đăng xuất</span>
+                </Link>
               )}
             </div>
           </Box>

@@ -1,14 +1,12 @@
-import { useState } from 'react';
-import Auth from './routers/Auth';
+import { useState } from "react";
+import Auth from "./routers/Auth";
 
 function App() {
-
-
-    return (
-        <>
-            <Auth />
-        </>
-    );
+  return (
+    <>
+      <Auth />
+    </>
+  );
 }
 
 export default App;

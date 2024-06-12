@@ -24,11 +24,15 @@ const ProfileTeacher = lazy(() =>
   import("../pages/ProfileTeacher/ProfileTeacher")
 );
 
-
 // Admin
 const CreateClass = lazy(() => import("../pages/admin/CreateClass/CreateClass"));
+const EditClass = lazy(() => import("../pages/admin/EditClass/EditClass"));
+const AddBook = lazy(() => import("../pages/admin/AddBook/AddBook"));
+const EditBook = lazy(() => import("../pages/admin/EditBook/EditBook"));
+const ListClasses = lazy(() => import("../pages/admin/ListClasses/ListClasses"));
+
 const Auth = () => {
-  const role =  JSON.parse(localStorage.getItem("account"))?.role;
+  const role = JSON.parse(localStorage.getItem("account"))?.role;
   return (
     <Routes>
       <Route
@@ -103,8 +107,8 @@ const Auth = () => {
           </Suspense>
         }
       />
-      {
-        role === "ADMIN" && (
+      {role === "ADMIN" && (
+        <>
           <Route
             path="/admin/create-class"
             element={
@@ -113,8 +117,40 @@ const Auth = () => {
               </Suspense>
             }
           />
-        )
-      }
+          <Route
+            path="/admin/edit-class/:classId"
+            element={
+              <Suspense fallback={<div></div>}>
+                <EditClass />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/add-book/:classId"
+            element={
+              <Suspense fallback={<div></div>}>
+                <AddBook />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/edit-book/:classId/:bookId"
+            element={
+              <Suspense fallback={<div></div>}>
+                <EditBook />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/list-classes"
+            element={
+              <Suspense fallback={<div></div>}>
+                <ListClasses />
+              </Suspense>
+            }
+          />
+        </>
+      )}
     </Routes>
   );
 };
