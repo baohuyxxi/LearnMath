@@ -24,7 +24,13 @@ export const AdminAPI = {
   getListClass: async () => {
     const res = await axios.get(`/class/list-class`);
     return res.data;
-  }
+  },
+  //get-one-class
+  ///class/one-class/663c8a359fa46b05d8f8869d
+  getOneClass: async (classId) => {
+    const res = await axios.get(`/class/one-class/${classId}`);
+    return res.data;
+  },
 };
 
 export default AdminAPI;
