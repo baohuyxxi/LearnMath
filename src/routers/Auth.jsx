@@ -31,6 +31,9 @@ const AddBook = lazy(() => import("../pages/admin/AddBook/AddBook"));
 const EditBook = lazy(() => import("../pages/admin/EditBook/EditBook"));
 const ListClasses = lazy(() => import("../pages/admin/ListClasses/ListClasses"));
 
+//Teacher
+const CreateExam = lazy(() => import("../pages/teacher/CreateExam/CreateExam"));
+
 const Auth = () => {
   const role = JSON.parse(localStorage.getItem("account"))?.role;
   return (
@@ -151,6 +154,20 @@ const Auth = () => {
           />
         </>
       )}
+      {
+        role === "TEACHER" && (
+          <>
+            <Route
+              path="/create-exam"
+              element={
+                <Suspense fallback={<div></div>}>
+                  <CreateExam />
+                </Suspense>
+              }
+            />
+          </>
+        )
+      }
     </Routes>
   );
 };

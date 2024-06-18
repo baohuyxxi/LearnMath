@@ -31,6 +31,27 @@ export const AdminAPI = {
     const res = await axios.get(`/class/one-class/${classId}`);
     return res.data;
   },
+  //add-teacher /class/663c8a359fa46b05d8f8869d/teacher/in
+  addTeacher: async (data) => {
+    const res = await axios.post(`/class/${data.classId}/teacher/in`, data);
+    return res.data;
+  },
+  //remove-teacher /class/663391b23d98978a63484097/teacher/out
+  removeTeacher: async (data) => {
+    const res = await axios.post(`/class/${data.classId}/teacher/out`, data);
+    return res.data;
+  },
+
+  //{{HOSTING}}/class/663c8a359fa46b05d8f8869d/student/in add-student
+  addStudent: async (data) => {
+    const res = await axios.post(`/class/${data.classId}/student/in`, data);
+    return res.data;
+  },
+  //remove-student /class/663391b23d98978a63484097/student/out
+  removeStudent: async (data) => {
+    const res = await axios.post(`/class/${data.classId}/student/out`, data);
+    return res.data;
+  },
 };
 
 export default AdminAPI;
