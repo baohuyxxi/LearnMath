@@ -25,7 +25,7 @@ export default function ListClasses() {
                 <h2>{classItem.name}</h2>
                 <p>{classItem.description}</p>
                 {/* Edit button */}
-                <Link to={`/admin/edit-class/${classItem._id}`} className="edit-button">
+                <Link to={`/edit-class/${classItem._id}`} className="edit-button">
                   Chỉnh sửa
                 </Link>
               </li>

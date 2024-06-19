@@ -6,6 +6,7 @@ const pathLabels = {
     "/courses": "Khóa học",
     "/exams": "Đề thi",
     "/tutorials": "Hướng dẫn học",
+    "create-exam": "Tạo đề thi",
   };
   
   export default pathLabels;

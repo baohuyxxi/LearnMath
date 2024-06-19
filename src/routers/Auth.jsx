@@ -25,11 +25,15 @@ const ProfileTeacher = lazy(() =>
 );
 
 // Admin
-const CreateClass = lazy(() => import("../pages/admin/CreateClass/CreateClass"));
+const CreateClass = lazy(() =>
+  import("../pages/admin/CreateClass/CreateClass")
+);
 const EditClass = lazy(() => import("../pages/admin/EditClass/EditClass"));
 const AddBook = lazy(() => import("../pages/admin/AddBook/AddBook"));
 const EditBook = lazy(() => import("../pages/admin/EditBook/EditBook"));
-const ListClasses = lazy(() => import("../pages/admin/ListClasses/ListClasses"));
+const ListClasses = lazy(() =>
+  import("../pages/admin/ListClasses/ListClasses")
+);
 
 //Teacher
 const CreateExam = lazy(() => import("../pages/teacher/CreateExam/CreateExam"));
@@ -120,14 +124,7 @@ const Auth = () => {
               </Suspense>
             }
           />
-          <Route
-            path="/admin/edit-class/:classId"
-            element={
-              <Suspense fallback={<div></div>}>
-                <EditClass />
-              </Suspense>
-            }
-          />
+          
           <Route
             path="/admin/add-book/:classId"
             element={
@@ -144,30 +141,41 @@ const Auth = () => {
               </Suspense>
             }
           />
+        
+        </>
+      )}
+      {role === "TEACHER" && (
+        <>
           <Route
-            path="/admin/list-classes"
+            path="/create-exam"
             element={
               <Suspense fallback={<div></div>}>
-                <ListClasses />
+                <CreateExam />
               </Suspense>
             }
           />
         </>
       )}
-      {
-        role === "TEACHER" && (
-          <>
-            <Route
-              path="/create-exam"
-              element={
-                <Suspense fallback={<div></div>}>
-                  <CreateExam />
-                </Suspense>
-              }
-            />
-          </>
-        )
-      }
+     {(role === "TEACHER" || role === "ADMIN") && (
+        <>
+          <Route
+            path="/list-classes"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <ListClasses />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/edit-class/:classId"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditClass />
+              </Suspense>
+            }
+          />
+        </>
+      )}
     </Routes>
   );
 };

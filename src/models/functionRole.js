@@ -29,21 +29,20 @@ const commonDropdownMenuItems = [
   },
 ];
 
-const adminDropdownMenuItems = [
-  ...commonDropdownMenuItems,
-  { to: "/admin", text: "Admin Dashboard" },
-];
+const adminDropdownMenuItems = [{ to: "/admin", text: "Admin Dashboard" }];
 
 const teacherDropdownMenuItems = [
-  ...commonDropdownMenuItems,
-  { to: "/teacher", text: "Teacher Dashboard" },
+  {
+    to: "/create-exam",
+    text: "Tạo đề thi",
+  }, { to: "/list-classes", text: "Danh sách lớp học" },
 ];
 
 export const getDropdownMenuItems = (role) => {
   switch (role) {
-    case "admin":
+    case "ADMIN":
       return adminDropdownMenuItems;
-    case "teacher":
+    case "TEACHER":
       return teacherDropdownMenuItems;
     default:
       return commonDropdownMenuItems;
@@ -72,7 +71,7 @@ const teacherMenuItems = [
   {
     to: "/create-exam",
     text: "Tạo đề thi",
-  },
+  }, { to: "/list-classes", text: "Danh sách lớp học" },
 ];
 
 export const getMenuItems = (role) => {
