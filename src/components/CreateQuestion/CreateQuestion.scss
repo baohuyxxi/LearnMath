@@ -1,28 +1,39 @@
-.question-form-group {
+.create-question {
   margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 
-  .question-label {
-    display: block;
+  &__label {
     font-weight: bold;
     margin-bottom: 10px;
+    display: block;
   }
 
-  .question-textarea {
+  &__textarea {
     width: 100%;
-    height: 80px;
     padding: 10px;
-    margin-bottom: 10px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    margin-bottom: 10px;
   }
 
-  .question-select {
-    padding: 10px;
+  &__type {
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    width: 100%;
+
+    &-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    &-select {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
   }
 }

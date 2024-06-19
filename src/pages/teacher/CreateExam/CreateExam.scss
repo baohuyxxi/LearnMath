@@ -1,63 +1,84 @@
-.create-exam {
+.create-exam-page {
   padding: 20px;
-  background-color: #f9f9f9;
 
-  &__container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
+  .create-exam {
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-    h1 {
+    &__title {
+      font-size: 24px;
       margin-bottom: 20px;
-      text-align: center;
-      color: #333;
+      color: #333333;
     }
 
-    .form-group {
-      margin-bottom: 15px;
+    &__form {
+      .create-exam__form-group {
+        margin-bottom: 20px;
 
-      label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
+        .create-exam__label {
+          display: block;
+          font-size: 16px;
+          color: #666666;
+          margin-bottom: 8px;
+        }
+
+        .create-exam__input,
+        .create-exam__textarea,
+        .create-exam__select {
+          width: 100%;
+          padding: 10px;
+          font-size: 14px;
+          border: 1px solid #dddddd;
+          border-radius: 4px;
+          box-sizing: border-box;
+
+          &:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+          }
+        }
+
+        .create-exam__textarea {
+          min-height: 150px;
+          resize: vertical;
+        }
+
+        .create-exam__select {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20448%22%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M32%20128L128%20224l96-96%22%20fill%3D%22none%22%20stroke%3D%22%23000000%22%20stroke-width%3D%2232%22%2F%3E%3C%2Fsvg%3E");
+          background-repeat: no-repeat;
+          background-position: right 10px center;
+          padding-right: 40px;
+        }
       }
 
-      input,
-      textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+      .create-exam__add-question-button,
+      .create-exam__submit-button {
+        padding: 10px 20px;
         font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #ffffff;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #0056b3;
+        }
       }
 
-      textarea {
-        height: 80px;
-        resize: vertical;
-      }
+      .create-exam__add-question-button {
+        background-color: #28a745;
 
-      input[type="datetime-local"] {
-        padding: 8px;
-      }
-    }
-
-    button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      background-color: #007bff;
-      border: none;
-      border-radius: 4px;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-
-      &:hover {
-        background-color: #0056b3;
+        &:hover {
+          background-color: #218838;
+        }
       }
     }
   }

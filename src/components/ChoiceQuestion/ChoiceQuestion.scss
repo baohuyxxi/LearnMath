@@ -1,60 +1,69 @@
-.answer-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  
-    .answer-input,
-    .point-input {
-      width: 100%;
+.choice-question {
+    .choice-question__answer-group {
+      margin-bottom: 20px;
       padding: 10px;
-      margin: 5px 0;
       border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 16px;
-    }
+      border-radius: 5px;
   
-    .image-input {
-      display: none;
-    }
+      .choice-question__answer-input {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
   
-    .image-button {
-      margin: 5px 0;
-      padding: 5px 10px;
-      background-color: #007bff;
-      border: none;
-      border-radius: 4px;
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
+      .choice-question__selected-image {
+        width: 100px;
+        height: 100px;
+        display: block;
+        max-width: 100%;
+        margin-top: 10px;
+      }
   
-      &:hover {
-        background-color: #0056b3;
+      .choice-question__image-input {
+        display: none; // Hide the default file input
+      }
+  
+      .choice-question__image-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+  
+      .choice-question__point-input {
+        width: 80px;
+        margin-left: 10px;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
       }
     }
   
-    .selected-image {
-      max-width: 100px;
-      max-height: 100px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-  
-    .point-input {
-      width: 100px;
-    }
-  
-    .add-answer-button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #007bff;
-      border: none;
-      border-radius: 4px;
+    .choice-question__add-answer-button {
+      background-color: #28a745;
       color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
   
       &:hover {
-        background-color: #0056b3;
+        background-color: #218838;
       }
     }
   }

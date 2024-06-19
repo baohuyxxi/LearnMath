@@ -9,54 +9,62 @@ const FillNumberQuestion = ({
   qIndex,
 }) => {
   return (
-    <div className="answer-group">
-      <input
-        className="answer-input"
-        type="text"
-        placeholder="Câu hỏi"
-        value={question.content}
-        onChange={(e) =>
-          handleQuestionChange(qIndex, "content", e.target.value)
-        }
-      />
-      <input
-        className="correct-input"
-        type="text"
-        placeholder="Đáp án đúng"
-        value={question.correct}
-        onChange={(e) =>
-          handleAnswerChange(qIndex, 0, "correct", e.target.value)
-        }
-      />
-      <input
-        className="image-input"
-        type="text"
-        placeholder="URL hình ảnh (nếu có)"
-        value={question.image}
-        onChange={(e) => handleQuestionChange(qIndex, "image", e.target.value)}
-      />
-      <input
-        className="point-input"
-        type="number"
-        placeholder="Điểm"
-        value={question.point}
-        onChange={(e) => handleQuestionChange(qIndex, "point", e.target.value)}
-      />
+    <>
+      {question.answers.map((answer, aIndex) => (
+        <div key={aIndex} className="fill-number-answer-group">
+          <input
+            className="fill-number-answer-input"
+            type="text"
+            placeholder="Câu hỏi"
+            value={answer.content}
+            onChange={(e) =>
+              handleAnswerChange(qIndex, aIndex, "content", e.target.value)
+            }
+          />
+          <input
+            className="fill-number-correct-input"
+            type="text"
+            placeholder="Đáp án đúng"
+            value={answer.correct}
+            onChange={(e) =>
+              handleAnswerChange(qIndex, aIndex, "correct", e.target.value)
+            }
+          />
+          <input
+            className="fill-number-image-input"
+            type="text"
+            placeholder="URL hình ảnh (nếu có)"
+            value={answer.image}
+            onChange={(e) =>
+              handleAnswerChange(qIndex, aIndex, "image", e.target.value)
+            }
+          />
+          <input
+            className="fill-number-point-input"
+            type="number"
+            placeholder="Điểm"
+            value={answer.point}
+            onChange={(e) =>
+              handleAnswerChange(qIndex, aIndex, "point", e.target.value)
+            }
+          />
+        </div>
+      ))}
       <button
-        className="add-answer-button"
+        className="fill-number-add-answer-button"
         type="button"
         onClick={() =>
           handleAddAnswer(qIndex, {
             content: "",
             image: "",
-            correct: false,
+            correct: "",
             point: 0,
           })
         }
       >
         Thêm Câu Trả Lời
       </button>
-    </div>
+    </>
   );
 };
 

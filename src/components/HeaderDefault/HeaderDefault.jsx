@@ -58,9 +58,9 @@ export default function HeaderDefault() {
     <header className="header-default">
       <div className="header-default__container slide-menu">
         <div className="slide-menu__left col">
-          <div className="slide-menu__left__item">
+         
             <img src={logo} alt="logo" className="logo" />
-          </div>
+    
           {leftMenuItems.map((item, index) => (
             <Link key={index} to={item.to} className="slide-menu__left__item">
               <span>{item.text}</span>
