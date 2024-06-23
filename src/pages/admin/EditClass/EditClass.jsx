@@ -57,12 +57,7 @@ const EditClass = () => {
       const response = await AdminAPI.addTeacher({ classId, teacherId }).then((res) => {
         console.log(res);
       })
-      // setClassData((prevClassData) => ({
-      //   ...prevClassData,
-      //   teacherIds: [...prevClassData.teacherIds, teacherId],
-      // }));
-      // const newTeacher = await PublicAPI.getTeacher(teacherId);
-      // setTeachers((prevTeachers) => [...prevTeachers, newTeacher]);
+    
     } catch (error) {}
   };
 
