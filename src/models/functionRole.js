@@ -63,7 +63,7 @@ const commonMenuItems = [
 const adminMenuItems = [
   { to: "/admin", text: "Admin Dashboard" },
   { to: "/admin/create-class", text: "Tạo lớp học" },
-  { to: "/admin/list-classes", text: "Danh sách lớp học" },
+  { to: "/list-classes", text: "Danh sách lớp học" },
 ];
 
 const teacherMenuItems = [

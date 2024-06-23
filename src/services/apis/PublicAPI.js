@@ -16,6 +16,11 @@ const PublicAPI = {
         return res.data;
     },
 
+    getTeacher: async (id) => {
+        const res = await axios.get(`/user/teacher/${id}`);
+        return res.data;
+    },
+
 }
 
 export default PublicAPI;

@@ -16,9 +16,11 @@ import logo from "~/assets/images/logoMain.jpg";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 import accountSlice from "~/redux/accountSlice";
 import { getLeftMenuItems, getRightMenuItems, getDropdownMenuItems } from '~/models/functionRole'
+import { useNavigate } from "react-router-dom";
 
 export default function HeaderDefault() {
   const dispatch = useDispatch();
+  const navigate = useNavigate  ();
   const [anchor, setAnchor] = useState("right");
   const [open, setOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -51,6 +53,7 @@ export default function HeaderDefault() {
 
   const handleLogout = () => {
     dispatch(accountSlice.actions.logout());
+    navigate("/");
     setConfirmOpen(false);
   };
 

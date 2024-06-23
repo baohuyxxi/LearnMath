@@ -33,12 +33,12 @@ export const AdminAPI = {
   },
   //add-teacher /class/663c8a359fa46b05d8f8869d/teacher/in
   addTeacher: async (data) => {
-    const res = await axios.post(`/class/${data.classId}/teacher/in`, data);
+    const res = await axios.put(`/class/${data.classId}/teacher/in`, data);
     return res.data;
   },
   //remove-teacher /class/663391b23d98978a63484097/teacher/out
   removeTeacher: async (data) => {
-    const res = await axios.post(`/class/${data.classId}/teacher/out`, data);
+    const res = await axios.put(`/class/${data.classId}/teacher/out`, data);
     return res.data;
   },
 

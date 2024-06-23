@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AdminAPI from "~/services/apis/AdminAPI";
+import PublicAPI from "~/services/apis/PublicAPI";
 import FramePage from "~/components/FramePage/FramePage";
+import { DataGrid } from "@mui/x-data-grid";
 import "./EditClass.scss";
 
 const EditClass = () => {
@@ -9,20 +11,31 @@ const EditClass = () => {
   const [classData, setClassData] = useState({
     name: "",
     description: "",
-    books: [{ name: "", description: "", type: "" }],
+    books: [],
     teacherIds: [],
-    studentIds: [],
   });
+  const [listTeachers, setListTeachers] = useState([]);
+  const [teachers, setTeachers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await AdminAPI.getOneClass(classId);
-        const { name, description, books, teacherIds, studentIds } = response.data;
-        setClassData({ name, description, books, teacherIds, studentIds });
-      } catch (error) {
-        console.error("Error fetching class data:", error);
-      }
+        const { name, description, books, teacherIds } = response.data;
+        const teacherData = await Promise.all(
+          teacherIds.flatMap(async (id) => {
+            const data = await PublicAPI.getTeacher(id);
+            return data.data;
+          })
+        );
+        setTeachers(teacherData);
+        setClassData({ name, description, books, teacherIds });
+      } catch (error) {}
+      try {
+        const listTeachers = await PublicAPI.getListTeacher();
+
+        setListTeachers(listTeachers.data);
+      } catch (error) {}
     };
     fetchData();
   }, [classId]);
@@ -31,10 +44,7 @@ const EditClass = () => {
     e.preventDefault();
     try {
       const response = await AdminAPI.editClass({ classId, ...classData });
-      console.log("Class updated successfully:", response);
-    } catch (error) {
-      console.error("Error updating class:", error);
-    }
+    } catch (error) {}
   };
 
   const handleChange = (e) => {
@@ -44,43 +54,72 @@ const EditClass = () => {
 
   const handleAddTeacher = async (teacherId) => {
     try {
-      const response = await AdminAPI.addTeacher({ classId, teacherId });
-      console.log("Teacher added successfully:", response);
-      // Optionally update the UI or state after adding a teacher
-    } catch (error) {
-      console.error("Error adding teacher:", error);
-    }
+      const response = await AdminAPI.addTeacher({ classId, teacherId }).then((res) => {
+        console.log(res);
+      })
+      // setClassData((prevClassData) => ({
+      //   ...prevClassData,
+      //   teacherIds: [...prevClassData.teacherIds, teacherId],
+      // }));
+      // const newTeacher = await PublicAPI.getTeacher(teacherId);
+      // setTeachers((prevTeachers) => [...prevTeachers, newTeacher]);
+    } catch (error) {}
   };
 
   const handleRemoveTeacher = async (teacherId) => {
     try {
       const response = await AdminAPI.removeTeacher({ classId, teacherId });
-      console.log("Teacher removed successfully:", response);
-      // Optionally update the UI or state after removing a teacher
-    } catch (error) {
-      console.error("Error removing teacher:", error);
-    }
+
+      setClassData((prevClassData) => ({
+        ...prevClassData,
+        teacherIds: prevClassData.teacherIds.filter((id) => id !== teacherId),
+      }));
+      setTeachers((prevTeachers) =>
+        prevTeachers.filter((teacher) => teacher._id !== teacherId)
+      );
+      AdminAPI.removeTeacher({ classId, teacherId }).then((res) => {});
+    } catch (error) {}
   };
 
-  const handleAddStudent = async (studentId) => {
-    try {
-      const response = await AdminAPI.addStudent({ classId, studentId });
-      console.log("Student added successfully:", response);
-      // Optionally update the UI or state after adding a student
-    } catch (error) {
-      console.error("Error adding student:", error);
-    }
+  const handleEditCellChange = ({ id, field, value }) => {
+    setClassData((prevClassData) => ({
+      ...prevClassData,
+      books: prevClassData.books.map((book, index) =>
+        index === id ? { ...book, [field]: value } : book
+      ),
+    }));
   };
 
-  const handleRemoveStudent = async (studentId) => {
-    try {
-      const response = await AdminAPI.removeStudent({ classId, studentId });
-      console.log("Student removed successfully:", response);
-      // Optionally update the UI or state after removing a student
-    } catch (error) {
-      console.error("Error removing student:", error);
-    }
-  };
+  const bookColumns = [
+    { field: "name", headerName: "Tên sách", width: 200, editable: true },
+    {
+      field: "description",
+      headerName: "Mô tả sách",
+      width: 300,
+      editable: true,
+    },
+    { field: "type", headerName: "Loại sách", width: 150, editable: true },
+  ];
+
+  const teacherColumns = [
+    { field: "firstName", headerName: "Họ", width: 150 },
+    { field: "lastName", headerName: "Tên", width: 150 },
+    { field: "email", headerName: "Email", width: 200 },
+    { field: "phone", headerName: "Số điện thoại", width: 150 },
+    {
+      field: "actions",
+      headerName: "Hành động",
+      width: 150,
+      renderCell: (params) => (
+        <button
+          onClick={() => handleRemoveTeacher(params.row._id)}
+          className="edit-class__button"
+        >
+          Xóa
+        </button>
+      ),
+    },
+  ];
 
   return (
     <FramePage>
@@ -89,7 +128,9 @@ const EditClass = () => {
           <h1 className="edit-class__title">Chỉnh sửa lớp học</h1>
           <form onSubmit={handleSubmit} className="edit-class__form">
             <div className="edit-class__form-group">
-              <label htmlFor="class-name" className="edit-class__label">Tên lớp học</label>
+              <label htmlFor="class-name" className="edit-class__label">
+                Tên lớp học
+              </label>
               <input
                 type="text"
                 id="class-name"
@@ -100,7 +141,9 @@ const EditClass = () => {
               />
             </div>
             <div className="edit-class__form-group">
-              <label htmlFor="class-description" className="edit-class__label">Mô tả</label>
+              <label htmlFor="class-description" className="edit-class__label">
+                Mô tả
+              </label>
               <textarea
                 id="class-description"
                 name="description"
@@ -109,72 +152,55 @@ const EditClass = () => {
                 className="edit-class__textarea"
               />
             </div>
-            {classData.books.map((book, index) => (
-              <div key={index} className="edit-class__book-group">
-                <label htmlFor={`book-name-${index}`} className="edit-class__label">Tên sách</label>
-                <input
-                  type="text"
-                  id={`book-name-${index}`}
-                  name={`books[${index}].name`}
-                  value={book.name}
-                  onChange={handleChange}
-                  className="edit-class__input"
-                />
-                <label htmlFor={`book-description-${index}`} className="edit-class__label">Mô tả sách</label>
-                <textarea
-                  id={`book-description-${index}`}
-                  name={`books[${index}].description`}
-                  value={book.description}
-                  onChange={handleChange}
-                  className="edit-class__textarea"
-                />
-                <label htmlFor={`book-type-${index}`} className="edit-class__label">Loại sách</label>
-                <input
-                  type="text"
-                  id={`book-type-${index}`}
-                  name={`books[${index}].type`}
-                  value={book.type}
-                  onChange={handleChange}
-                  className="edit-class__input"
-                />
-              </div>
-            ))}
-            <button type="submit" className="edit-class__button">Cập nhật lớp học</button>
+
+            <div className="edit-class__books">
+              <h2 className="edit-class__subtitle">Danh sách sách</h2>
+              <DataGrid
+                rows={classData.books.map((book, index) => ({
+                  id: index,
+                  ...book,
+                }))}
+                columns={bookColumns}
+                autoHeight
+                disableSelectionOnClick
+                onCellEditCommit={handleEditCellChange}
+              />
+            </div>
+
+            <button type="submit" className="edit-class__button">
+              Cập nhật lớp học
+            </button>
           </form>
 
           <div className="edit-class__teachers">
             <h2 className="edit-class__subtitle">Danh sách giáo viên</h2>
-            <ul className="edit-class__list">
-              {classData.teacherIds.map((teacherId) => (
-                <li key={teacherId} className="edit-class__list-item">
-                  Giáo viên ID: {teacherId}{" "}
-                  <button onClick={() => handleRemoveTeacher(teacherId)} className="edit-class__button">Xóa</button>
-                </li>
-              ))}
-            </ul>
-            {/* Add Teacher Form */}
-            <form onSubmit={(e) => { e.preventDefault(); addTeacher(e.target.value) }} className="edit-class__form">
-              <input type="text" placeholder="Teacher ID" value={classData.teacherId}
-                onChange={handleChange} className="edit-class__input" />
-              <button type="submit" className="edit-class__button">Add Teacher</button>
-            </form>
-          </div>
-
-          <div className="edit-class__students">
-            <h2 className="edit-class__subtitle">Danh sách học sinh</h2>
-            <ul className="edit-class__list">
-              {classData.studentIds.map((studentId) => (
-                <li key={studentId} className="edit-class__list-item">
-                  Học sinh ID: {studentId}{" "}
-                  <button onClick={() => handleRemoveStudent(studentId)} className="edit-class__button">Xóa</button>
-                </li>
-              ))}
-            </ul>
-            {/* Add Student Form */}
-            <form onSubmit={(e) => { e.preventDefault(); addStudent(e.target.value) }} className="edit-class__form">
-              <input type="text" placeholder="Student ID" value={classData.studentId}
-                onChange={handleChange} className="edit-class__input" />
-              <button type="submit" className="edit-class__button">Add Student</button>
+            <DataGrid
+              rows={teachers.map((teacher) => ({
+                id: teacher._id,
+                ...teacher,
+              }))}
+              columns={teacherColumns}
+              autoHeight
+              disableSelectionOnClick
+            />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleAddTeacher(e.target.elements.teacherId.value);
+              }}
+              className="edit-class__form"
+            >
+              <select name="teacherId" className="edit-class__input">
+                <option value="">Chọn giáo viên</option>
+                {listTeachers.map((teacher) => (
+                  <option key={teacher._id} value={teacher._id}>
+                    {teacher.firstName} {teacher.lastName}
+                  </option>
+                ))}
+              </select>
+              <button type="submit" className="edit-class__button">
+                Add Teacher
+              </button>
             </form>
           </div>
         </div>
