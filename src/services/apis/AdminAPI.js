@@ -8,6 +8,7 @@ export const AdminAPI = {
   },
   // edit-class
   editClass: async (data) => {
+    console.log(data);  
     const res = await axios.put(`class/${data.classId}`, data);
     return res.data;
   },

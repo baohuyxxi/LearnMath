@@ -42,6 +42,7 @@ export default function ChapterModalContent({
         name: pdfFile.name,
         link: uploadResponse.data.link,
       };
+      
       handleLessonDetailChange(documentPDF, "documentPDF", lessonId);
     } catch (error) {
       alert("Đã xảy ra lỗi khi upload tài liệu. Vui lòng thử lại sau.");
@@ -91,7 +92,7 @@ export default function ChapterModalContent({
         });
     }))
   }
-  console.log(selectedChapter);
+
   return (
     <Box
       className="edit-book__modal"
