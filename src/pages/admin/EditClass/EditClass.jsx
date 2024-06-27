@@ -5,8 +5,11 @@ import PublicAPI from "~/services/apis/PublicAPI";
 import FramePage from "~/components/FramePage/FramePage";
 import { DataGrid } from "@mui/x-data-grid";
 import "./EditClass.scss";
-
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 const EditClass = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
   const { classId } = useParams();
   const [classData, setClassData] = useState({
     name: "",
@@ -42,9 +45,15 @@ const EditClass = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await AdminAPI.editClass({ classId, ...classData });
-    } catch (error) {}
+    await AdminAPI.editClass({ classId, ...classData })
+      .then((res) => {
+        enqueueSnackbar("Lớp học đã được cập nhật", { variant: "success" });
+      })
+      .catch((error) => {
+        enqueueSnackbar("Đã xảy ra lỗi khi cập nhật lớp học", {
+          variant: "error",
+        });
+      });
   };
 
   const handleChange = (e) => {
@@ -54,10 +63,11 @@ const EditClass = () => {
 
   const handleAddTeacher = async (teacherId) => {
     try {
-      const response = await AdminAPI.addTeacher({ classId, teacherId }).then((res) => {
-        console.log(res);
-      })
-    
+      const response = await AdminAPI.addTeacher({ classId, teacherId }).then(
+        (res) => {
+          console.log(res);
+        }
+      );
     } catch (error) {}
   };
 
@@ -77,12 +87,7 @@ const EditClass = () => {
   };
 
   const handleEditCellChange = ({ id, field, value }) => {
-    setClassData((prevClassData) => ({
-      ...prevClassData,
-      books: prevClassData.books.map((book, index) =>
-        index === id ? { ...book, [field]: value } : book
-      ),
-    }));
+    navigate(`/edit-book/${classId}/${classData.books[id]._id}`);
   };
 
   const bookColumns = [
@@ -94,6 +99,20 @@ const EditClass = () => {
       editable: true,
     },
     { field: "type", headerName: "Loại sách", width: 150, editable: true },
+    {
+      field: "actions",
+      headerName: "Hành động",
+      width: 150,
+      renderCell: (params) => (
+        //edit
+        <button
+          onClick={() => handleEditCellChange(params.row)}
+          className="edit-class__button"
+        >
+          Sửa
+        </button>
+      ),
+    },
   ];
 
   const teacherColumns = [

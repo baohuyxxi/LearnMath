@@ -134,7 +134,7 @@ const Auth = () => {
             }
           />
           <Route
-            path="/admin/edit-book/:classId/:bookId"
+            path="/edit-book/:classId/:bookId"
             element={
               <Suspense fallback={<div></div>}>
                 <EditBook />

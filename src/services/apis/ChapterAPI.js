@@ -7,8 +7,8 @@ export const ChapterAPI = {
     return res.data;
   },
   //edit-chapter /chapter/663c9bbac5e40783c04faa80
-  editChapter: async (data) => {
-    const res = await axios.put(`/chapter/${data.chapterId}`, data);
+  editChapter: async (data,chapterId ) => {
+    const res = await axios.put(`/chapter/${chapterId}`, data);
     return res.data;
   },
   //delete-chapter  /chapter/663c9bbac5e40783c04faa80
