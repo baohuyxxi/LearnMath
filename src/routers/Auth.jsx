@@ -23,6 +23,7 @@ const Tutorials = lazy(() => import("../pages/Tutorials/Tutorials"));
 const ProfileTeacher = lazy(() =>
   import("../pages/ProfileTeacher/ProfileTeacher")
 );
+const ClassDetails = lazy(() => import("../pages/ClassDetails/ClassDetails"));
 
 // Admin
 const CreateClass = lazy(() =>
@@ -107,6 +108,14 @@ const Auth = () => {
         }
       />
       <Route
+        path="/courses/:classId"
+        element={
+          <Suspense fallback={<div></div>}>
+            <ClassDetails />
+          </Suspense>
+        }
+      />
+      <Route
         path="*"
         element={
           <Suspense>
@@ -124,7 +133,7 @@ const Auth = () => {
               </Suspense>
             }
           />
-          
+
           <Route
             path="/admin/add-book/:classId"
             element={
@@ -141,7 +150,6 @@ const Auth = () => {
               </Suspense>
             }
           />
-        
         </>
       )}
       {role === "TEACHER" && (
@@ -156,7 +164,7 @@ const Auth = () => {
           />
         </>
       )}
-     {(role === "TEACHER" || role === "ADMIN") && (
+      {(role === "TEACHER" || role === "ADMIN") && (
         <>
           <Route
             path="/list-classes"

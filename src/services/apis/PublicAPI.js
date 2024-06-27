@@ -20,6 +20,16 @@ const PublicAPI = {
         const res = await axios.get(`/user/teacher/${id}`);
         return res.data;
     },
+    //get-list-class /class/list-class
+    getListClass: async () => {
+        const res = await axios.get(`/class/list-class`);
+        return res.data;
+    },
+    //get-one-class /class/one-class/666c3631dc99260fbddf3f11
+    getOneClass: async (id) => {
+        const res = await axios.get(`/class/one-class/${id}`);
+        return res.data;
+    },
 
 }
 
